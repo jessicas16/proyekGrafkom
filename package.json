@@ -1,0 +1,23 @@
+{
+  "name": "proyekgrafkom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessicas16/proyekGrafkom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jessicas16/proyekGrafkom/issues"
+  },
+  "homepage": "https://github.com/jessicas16/proyekGrafkom#readme",
+  "dependencies": {
+    "three": "^0.152.2"
+  }
+}
