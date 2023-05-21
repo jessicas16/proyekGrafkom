@@ -43,10 +43,29 @@ display('./room_blank/scene.gltf',function(o){}, function(s){},
 
 // display('./planet/scene.gltf',function(o){}, function(s){},{
 //     x: 10,
-//     y: 2,
-//     z: 3,
+//     y: 10,
+//     z: 10,
 //     scale: 0.1
 // })
+
+display('./rocket/scene.gltf',function(o){
+    o.position.y = 2
+}, function(s){},{
+    x: 3,
+    y: 3,
+    z: 3,
+    scale: 0.01
+})
+
+display('./alien_head/scene.gltf',function(o){
+    o.position.y = 1
+    o.position.x = 3
+}, function(s){},{
+    x: 0,
+    y: 0,
+    z: 0,
+    scale: 0.01
+})
 
 function display(path, objectTransformation, stageTransformation, pos){
     const light = new THREE.PointLight(0xffffff, 2, 100)
