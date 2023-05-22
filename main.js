@@ -22,24 +22,35 @@ const directLight = new THREE.DirectionalLight(0xffffff, 1)
 directLight.position.y = 50000
 scene.add(directLight)
 
-const groundGeometry = new THREE.BoxGeometry(30,30, baseheight)
-const groundMaterial = new THREE.MeshStandardMaterial({color: 0x080b24})
-const groundObj = new THREE.Mesh(groundGeometry, groundMaterial)
-groundObj.rotation.x = Math.PI / 2
-groundObj.position.y = baseheight
-scene.add(groundObj)
+// const groundGeometry = new THREE.BoxGeometry(30,30, baseheight)
+// const groundMaterial = new THREE.MeshStandardMaterial({color: 0x080b24})
+// const groundObj = new THREE.Mesh(groundGeometry, groundMaterial)
+// groundObj.rotation.x = Math.PI / 2
+// groundObj.position.y = baseheight
+// scene.add(groundObj)
 
 var objects = []
 
 const loader = new THREE.GLTFLoader();
 
-display('./room_blank/scene.gltf',function(o){}, function(s){},
-    {
-        x: 0,
-        y: 5,
-        z: 0,
-        scale: 2
-    })
+// display('./room_blank/scene.gltf',function(o){}, function(s){},
+//     {
+//         x: 0,
+//         y: 5,
+//         z: 0,
+//         scale: 2
+//     })
+// display('./sky/scene.gltf',function(o){
+//     o.position.z = 5
+//     o.position.x = 5
+//     o.position.y = 5
+// }, function(s){},
+//     {
+//         x: 0,
+//         y: 5,
+//         z: 0,
+//         scale: 2
+//     })
 
 // display('./planet/scene.gltf',function(o){}, function(s){},{
 //     x: 10,
@@ -49,7 +60,16 @@ display('./room_blank/scene.gltf',function(o){}, function(s){},
 // })
 
 display('./rocket/scene.gltf',function(o){
-    o.position.y = 2
+    o.position.y = 3
+    o.position.x = -5
+    function animateAstronot(){
+        requestAnimationFrame(animateAstronot)
+        control.update()
+        o.rotation.x += 0.1
+        // o.rotation.y += 0.1
+        // o.position.x += 0.01
+    }
+    animateAstronot()
 }, function(s){},{
     x: 3,
     y: 3,
@@ -60,12 +80,38 @@ display('./rocket/scene.gltf',function(o){
 display('./alien_head/scene.gltf',function(o){
     o.position.y = 1
     o.position.x = 3
+   
+    function animateNdas(){
+        requestAnimationFrame(animateNdas)
+        control.update()
+        o.rotation.y += 0.1
+        o.rotation.x += 0.2
+    }
+    animateNdas()
+
 }, function(s){},{
-    x: 0,
-    y: 0,
-    z: 0,
+    x: 3,
+    y: 3,
+    z: 3,
     scale: 0.01
 })
+
+display('./meteor/scene.gltf', function(o){
+    o.position.y = 1;
+    o.position.x = -2
+    function animateMeteor(){
+        requestAnimationFrame(animateMeteor)
+        control.update()
+        o.rotation.x += 0.03
+    }
+    animateMeteor()
+}, function(s){}, {
+    x : 3,
+    y: 3,
+    z: 3,
+    scale: 1
+})
+
 
 function display(path, objectTransformation, stageTransformation, pos){
     const light = new THREE.PointLight(0xffffff, 2, 100)
