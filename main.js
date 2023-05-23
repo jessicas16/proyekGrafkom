@@ -15,6 +15,9 @@ renderer.setClearColor(0x111111, 1)
 
 // const grid = new THREE.GridHelper(200, 50)
 // scene.add(grid)
+const bg =  new THREE.TextureLoader().load('./textures/galaxy.png');
+console.log(bg)
+scene.background = bg
 
 const control = new THREE.OrbitControls(camera, renderer.domElement)
 
@@ -51,6 +54,7 @@ const loader = new THREE.GLTFLoader();
 //         z: 0,
 //         scale: 2
 //     })
+
 
 displayPlanet('./planets/scene.gltf',function(o){
     o.position.y = 1
