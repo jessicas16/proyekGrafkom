@@ -60,11 +60,18 @@ displayPlanet('./planets/scene.gltf',function(o){
     o.position.y = 1
     o.position.x = 0
     o.position.z = -10
+
+    function goyangPlanet(){
+        requestAnimationFrame(goyangPlanet)
+        control.update()
+        o.rotation.y += 0.03
+    }
+    goyangPlanet()
 }, function(s){},{
     x: 10,
     y: 10,
     z: 10,
-    scale: 20
+    scale: 10
 })
 
 display('./rocket/scene.gltf',function(o){
