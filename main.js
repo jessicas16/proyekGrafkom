@@ -52,12 +52,16 @@ const loader = new THREE.GLTFLoader();
 //         scale: 2
 //     })
 
-// display('./planet/scene.gltf',function(o){}, function(s){},{
-//     x: 10,
-//     y: 10,
-//     z: 10,
-//     scale: 0.1
-// })
+displayPlanet('./planets/scene.gltf',function(o){
+    o.position.y = 1
+    o.position.x = 0
+    o.position.z = -10
+}, function(s){},{
+    x: 10,
+    y: 10,
+    z: 10,
+    scale: 20
+})
 
 display('./rocket/scene.gltf',function(o){
     o.position.y = 3
@@ -112,6 +116,13 @@ display('./meteor/scene.gltf', function(o){
     scale: 1
 })
 
+function displayPlanet(path, objectTransformation, stageTransformation, pos){
+    const light = new THREE.PointLight(0xffffff, 0, 3)
+    light.position.set(pos.x-10, pos.y-10, pos.z-100)
+    scene.add(light)
+
+    loadObj(path, objectTransformation, pos)
+}
 
 function display(path, objectTransformation, stageTransformation, pos){
     const light = new THREE.PointLight(0xffffff, 2, 100)
@@ -120,6 +131,8 @@ function display(path, objectTransformation, stageTransformation, pos){
 
     loadObj(path, objectTransformation, pos)
 }
+
+
 
 function loadObj(path, manipFunc, pos){
     loader.load(path, function(gltf){
