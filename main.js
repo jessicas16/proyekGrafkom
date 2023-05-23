@@ -64,7 +64,7 @@ displayPlanet('./planets/scene.gltf',function(o){
     function goyangPlanet(){
         requestAnimationFrame(goyangPlanet)
         control.update()
-        o.rotation.y += 0.03
+        o.rotation.y += 0.01
     }
     goyangPlanet()
 }, function(s){},{
@@ -80,11 +80,14 @@ display('./rocket/scene.gltf',function(o){
     function animateAstronot(){
         requestAnimationFrame(animateAstronot)
         control.update()
-        o.rotation.x += 0.1
+        // o.rotation.x += 0.1
         // o.rotation.y += 0.1
-        // o.position.x += 0.01
+        if (o.position.x < 5){
+            o.position.x += 0.01
+        }
     }
     animateAstronot()
+
 }, function(s){},{
     x: 3,
     y: 3,
@@ -92,24 +95,24 @@ display('./rocket/scene.gltf',function(o){
     scale: 0.01
 })
 
-display('./alien_head/scene.gltf',function(o){
-    o.position.y = 1
-    o.position.x = 3
+// display('./alien_head/scene.gltf',function(o){
+//     o.position.y = 1
+//     o.position.x = 3
    
-    function animateNdas(){
-        requestAnimationFrame(animateNdas)
-        control.update()
-        o.rotation.y += 0.1
-        o.rotation.x += 0.2
-    }
-    animateNdas()
+//     function animateNdas(){
+//         requestAnimationFrame(animateNdas)
+//         control.update()
+//         o.rotation.y += 0.1
+//         o.rotation.x += 0.2
+//     }
+//     animateNdas()
 
-}, function(s){},{
-    x: 3,
-    y: 3,
-    z: 3,
-    scale: 0.01
-})
+// }, function(s){},{
+//     x: 3,
+//     y: 3,
+//     z: 3,
+//     scale: 0.01
+// })
 
 display('./meteor/scene.gltf', function(o){
     o.position.y = 1;
@@ -117,7 +120,7 @@ display('./meteor/scene.gltf', function(o){
     function animateMeteor(){
         requestAnimationFrame(animateMeteor)
         control.update()
-        o.rotation.x += 0.03
+        o.rotation.y += 0.03
     }
     animateMeteor()
 }, function(s){}, {
