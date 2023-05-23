@@ -43,17 +43,26 @@ const loader = new THREE.GLTFLoader();
 //         z: 0,
 //         scale: 2
 //     })
-// display('./sky/scene.gltf',function(o){
-//     o.position.z = 5
-//     o.position.x = 5
-//     o.position.y = 5
-// }, function(s){},
-//     {
-//         x: 0,
-//         y: 5,
-//         z: 0,
-//         scale: 2
-//     })
+display('./sky/scene.gltf',function(o){
+    o.position.z = -40
+    o.position.x = 0
+    o.position.y = 5
+    o.rotation.y = 1
+    o.rotation.x = 2.7
+
+    // function animateSky(){
+    //     requestAnimationFrame(animateSky)
+    //     control.update();
+    //     o.rotation.y += 0.1
+    // }
+    // animateSky()
+}, function(s){},
+    {
+        x: 0,
+        y: 5,
+        z: 0,
+        scale: 8  
+    })
 
 
 displayPlanet('./planets/scene.gltf',function(o){
