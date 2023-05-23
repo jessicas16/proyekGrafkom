@@ -124,12 +124,13 @@ display('./rocket/scene.gltf',function(o){
 // })
 
 display('./meteor/scene.gltf', function(o){
-    o.position.y = 1;
-    o.position.x = -2
+    o.position.y = 15;
+    o.position.x = -10
     function animateMeteor(){
         requestAnimationFrame(animateMeteor)
         control.update()
-        o.rotation.y += 0.03
+        o.position.y += -0.03
+        o.position.x += 0.05
     }
     animateMeteor()
 }, function(s){}, {
