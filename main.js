@@ -77,13 +77,22 @@ displayPlanet('./planets/scene.gltf',function(o){
 display('./rocket/scene.gltf',function(o){
     o.position.y = 3
     o.position.x = -5
+    o.rotation.y = 0
     function animateAstronot(){
         requestAnimationFrame(animateAstronot)
         control.update()
         // o.rotation.x += 0.1
         // o.rotation.y += 0.1
-        if (o.position.x < 5){
+        if (o.position.x < 10 && o.rotation.y < 2.718281828){
+            o.rotation.y = 0
             o.position.x += 0.01
+        } else {
+            o.rotation.y = 2.718281828
+            o.position.x -= 0.01
+        }
+
+        if(o.position.x < -10){
+            o.rotation.y = 0
         }
     }
     animateAstronot()
