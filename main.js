@@ -36,13 +36,6 @@ var objects = []
 
 const loader = new THREE.GLTFLoader();
 
-// display('./room_blank/scene.gltf',function(o){}, function(s){},
-//     {
-//         x: 0,
-//         y: 5,
-//         z: 0,
-//         scale: 2
-//     })
 display('./sky/scene.gltf',function(o){
     o.position.z = -40
     o.position.x = 0
@@ -56,14 +49,12 @@ display('./sky/scene.gltf',function(o){
     //     o.rotation.y += 0.1
     // }
     // animateSky()
-}, function(s){},
-    {
+}, function(s){}, {
         x: 0,
         y: 5,
         z: 0,
-        scale: 8  
-    })
-
+        scale: 10
+})
 
 displayPlanet('./planets/scene.gltf',function(o){
     o.position.y = 1
@@ -140,6 +131,11 @@ display('./meteor/scene.gltf', function(o){
         control.update()
         o.position.y += -0.03
         o.position.x += 0.05
+
+        if(o.position.y < -10){
+            o.position.y = 15
+            o.position.x = -10
+        }
     }
     animateMeteor()
 }, function(s){}, {
