@@ -15,7 +15,7 @@ renderer.setClearColor(0x111111, 1)
 
 // const grid = new THREE.GridHelper(200, 50)
 // scene.add(grid)
-const bg =  new THREE.TextureLoader().load('./textures/galaxy.png');
+const bg =  new THREE.TextureLoader().load('./textures/galaxy2.jpg');
 console.log(bg)
 scene.background = bg
 
@@ -36,27 +36,27 @@ var objects = []
 
 const loader = new THREE.GLTFLoader();
 
-display('./sky/scene.gltf',function(o){
-    o.position.z = -40
-    o.position.x = 0
-    o.position.y = 5
-    o.rotation.y = 1
-    o.rotation.x = 2.7
+// display('./sky/scene.gltf',function(o){
+//     o.position.z = -40
+//     o.position.x = 0
+//     o.position.y = 5
+//     o.rotation.y = 1
+//     o.rotation.x = 2.7
 
-    // function animateSky(){
-    //     requestAnimationFrame(animateSky)
-    //     control.update();
-    //     o.rotation.y += 0.1
-    // }
-    // animateSky()
-}, function(s){}, {
-        x: 0,
-        y: 5,
-        z: 0,
-        scale: 10
-})
+//     // function animateSky(){
+//     //     requestAnimationFrame(animateSky)
+//     //     control.update();
+//     //     o.rotation.y += 0.1
+//     // }
+//     // animateSky()
+// }, function(s){}, {
+//         x: 0,
+//         y: 5,
+//         z: 0,
+//         scale: 10
+// })
 
-displayPlanet('./planets/scene.gltf',function(o){
+displayPlanet('./solar_system/scene.gltf',function(o){
     o.position.y = 1
     o.position.x = 0
     o.position.z = -10
@@ -71,7 +71,7 @@ displayPlanet('./planets/scene.gltf',function(o){
     x: 10,
     y: 10,
     z: 10,
-    scale: 10
+    scale: 1500
 })
 
 display('./rocket/scene.gltf',function(o){
@@ -125,7 +125,8 @@ display('./rocket/scene.gltf',function(o){
 
 display('./meteor/scene.gltf', function(o){
     o.position.y = 15;
-    o.position.x = -10
+    o.position.x = -10;
+    o.position.z = -20;
     function animateMeteor(){
         requestAnimationFrame(animateMeteor)
         control.update()
