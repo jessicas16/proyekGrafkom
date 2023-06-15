@@ -42,13 +42,6 @@ const directLight = new THREE.DirectionalLight(0xffffff, 3)
 const light = new THREE.AmbientLight(0xffffff, 1)
 scene.add(light)
 
-// const groundGeometry = new THREE.BoxGeometry(30,30, baseheight)
-// const groundMaterial = new THREE.MeshStandardMaterial({color: 0x080b24})
-// const groundObj = new THREE.Mesh(groundGeometry, groundMaterial)
-// groundObj.rotation.x = Math.PI / 2
-// groundObj.position.y = baseheight
-// scene.add(groundObj)
-
 var objects = []
 
 const loader = new THREE.GLTFLoader();
@@ -92,14 +85,12 @@ const loader = new THREE.GLTFLoader();
 // })
 
 display('./rocket/scene.gltf',function(o){
-    o.position.y = 3
+    o.position.y = 1.5
     o.position.x = -5
     o.rotation.y = 0
     function animateAstronot(){
         requestAnimationFrame(animateAstronot)
         control.update()
-        // o.rotation.x += 0.1
-        // o.rotation.y += 0.1
         if (o.position.x < 10 && o.rotation.y < 2.718281828){
             o.rotation.y = 0
             o.position.x += 0.01
@@ -118,7 +109,7 @@ display('./rocket/scene.gltf',function(o){
     x: 3,
     y: 3,
     z: 3,
-    scale: 0.01
+    scale: 0.005
 })
 
 // display('./alien_head/scene.gltf',function(o){
@@ -140,53 +131,64 @@ display('./rocket/scene.gltf',function(o){
 //     scale: 0.01
 // })
 
-// display('./meteor/scene.gltf', function(o){
-//     o.position.y = 15;
-//     o.position.x = -10;
-//     o.position.z = -20;
-//     function animateMeteor(){
-//         requestAnimationFrame(animateMeteor)
-//         control.update()
-//         o.position.y += -0.03
-//         o.position.x += 0.05
+display('./satelit_buatan/scene.gltf',function(o){
+    o.position.y = 3;
+    o.position.x = 2;
+    // function animate(){
+    //     requestAnimationFrame(animate)
+    //     control.update()
+    //     o.position.y += -0.03
+    //     o.position.x += -0.05
 
-//         if(o.position.y < -10){
-//             o.position.y = 15
-//             o.position.x = -10
-//         }
-//     }
-//     animateMeteor()
-// }, function(s){}, {
-//     x : 3,
-//     y: 3,
-//     z: 3,
-//     scale: 1
-// })
-// const orbitRadius2 = 3;
-// const orbitGeometry2 = new THREE.CircleGeometry(orbitRadius2, 64);
-// const orbitMaterial2 = new THREE.LineBasicMaterial({ color: 0xffffff });
-// const orbit2 = new THREE.LineLoop(orbitGeometry2, orbitMaterial2);
+    //     if(o.position.y < -10){
+    //         o.position.y = 15
+    //         o.position.x = 10
+    //     }
+    // }
+    // animate()
 
+}, function(s){},{
+    x: 3,
+    y: 3,
+    z: 3,
+    scale: 3
+})
+
+display('./meteor/scene.gltf', function(o){
+    o.position.y = 15;
+    o.position.x = -10;
+    o.position.z = -20;
+    function animateMeteor(){
+        requestAnimationFrame(animateMeteor)
+        control.update()
+        o.position.y += -0.03
+        o.position.x += 0.05
+
+        if(o.position.y < -10){
+            o.position.y = 15
+            o.position.x = -10
+        }
+    }
+    animateMeteor()
+}, function(s){}, {
+    x : 3,
+    y: 3,
+    z: -1,
+    scale: 1.5
+})
 
 planet = [];
 const planet1 = drawSun(1.25, matahari, 0, 0, 0.001); //buat matahari
-const planet2 = drawSphere(0.5, merkurius, 2, 0, 0.004, 0.004, 2.5, 3); //merkurius
-const planet3 = drawSphere(0.4, venus, 3.25, 0, 0.005, 0.005, 4, 2.5); //venus
-const planet4 = drawSphere(0.6, bumi, 4.75, 0, 0.006, 0.006, 5.5, 2); //bumi
-const planet5 = drawSphere(0.5, mars, 6.5, 0, 0.003, 0.003, 7.1, 4); //mars
-const planet6 = drawSphere(0.9, jupiter, 8.5, 0, 0.002, 0.002, 9, 5); //jupiter
+const planet2 = drawSphere(0.5, merkurius, 2, 0, 0.004, 0.004, 2.5, 1); //merkurius
+const planet3 = drawSphere(0.4, venus, 3.25, 0, 0.005, 0.005, 4, 2); //venus
+const planet4 = drawSphere(0.6, bumi, 4.75, 0, 0.006, 0.006, 5.5, 1.5); //bumi
+const planet5 = drawSphere(0.5, mars, 6.5, 0, 0.003, 0.003, 7.1, 1.75); //mars
+const planet6 = drawSphere(0.9, jupiter, 8.5, 0, 0.002, 0.002, 9, 2.4); //jupiter
 const planet7 = drawSphere(0.7, saturnus, 11, 0, 0.005, 0.005, 11.2, 1); //saturnus
 const planet8 = drawSphere(0.6, uranus, 13, 0, 0.003, 0.005, 13, 2.3); //uranus
 const planet9 = drawSphere(0.5, neptunus, 15, 0, 0.006, 0.005, 14.5, 1.3); //neptunus
 const planet10 = drawSphere(0.3, pluto, 17, 0, 0.003, 0.003, 15.5, 2.5); //pluto
-const planet11 = drawSphere(0.2, bulan, 5, 1, 0.001, 0.003, 6.5, 2); //bulan
-//rotasi muter matahari
-// function muterMatahari(){
-//     requestAnimationFrame(muterMatahari)
-//     control.update()
-//     planet1.rotation.y += 0.001
-// }
-// muterMatahari()
+const planet11 = drawSphere(0.2, bulan, 5, 1, 0.001, 0.003, 6.5, 1); //bulan
 
 function drawSun(radius, texture, x, y, rotY){
     const geometry = new THREE.SphereGeometry(radius,50, 50);
@@ -245,18 +247,6 @@ function drawSphere(radius, texture, x, y, rotY, rotX, orbitRadius, orbitSpeed){
     muter()
 
     return muter;
-}
-
-animateSolarSystem();
-
-function animateSolarSystem(){
-    console.log(object.length)
-    // for(let i = 0; i < object.length; i++){
-    //     p = object[i];
-    //     const orbitSpeed = 0.01;
-    //     p.rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.01);
-    //     console.log(p)
-    // }
 }
 
 function displayPlanet(path, objectTransformation, stageTransformation, pos){
