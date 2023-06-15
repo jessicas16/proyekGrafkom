@@ -91,35 +91,35 @@ const loader = new THREE.GLTFLoader();
 //     scale: 1500
 // })
 
-// display('./rocket/scene.gltf',function(o){
-//     o.position.y = 3
-//     o.position.x = -5
-//     o.rotation.y = 0
-//     function animateAstronot(){
-//         requestAnimationFrame(animateAstronot)
-//         control.update()
-//         // o.rotation.x += 0.1
-//         // o.rotation.y += 0.1
-//         if (o.position.x < 10 && o.rotation.y < 2.718281828){
-//             o.rotation.y = 0
-//             o.position.x += 0.01
-//         } else {
-//             o.rotation.y = 2.718281828
-//             o.position.x -= 0.01
-//         }
+display('./rocket/scene.gltf',function(o){
+    o.position.y = 3
+    o.position.x = -5
+    o.rotation.y = 0
+    function animateAstronot(){
+        requestAnimationFrame(animateAstronot)
+        control.update()
+        // o.rotation.x += 0.1
+        // o.rotation.y += 0.1
+        if (o.position.x < 10 && o.rotation.y < 2.718281828){
+            o.rotation.y = 0
+            o.position.x += 0.01
+        } else {
+            o.rotation.y = 2.718281828
+            o.position.x -= 0.01
+        }
 
-//         if(o.position.x < -10){
-//             o.rotation.y = 0
-//         }
-//     }
-//     animateAstronot()
+        if(o.position.x < -10){
+            o.rotation.y = 0
+        }
+    }
+    animateAstronot()
 
-// }, function(s){},{
-//     x: 3,
-//     y: 3,
-//     z: 3,
-//     scale: 0.01
-// })
+}, function(s){},{
+    x: 3,
+    y: 3,
+    z: 3,
+    scale: 0.01
+})
 
 // display('./alien_head/scene.gltf',function(o){
 //     o.position.y = 1
@@ -179,7 +179,7 @@ const planet7 = drawSphere(0.7, saturnus, 11, 0, 0.005, 0.005, 11.2, 1); //satur
 const planet8 = drawSphere(0.6, uranus, 13, 0, 0.003, 0.005, 13, 2.3); //uranus
 const planet9 = drawSphere(0.5, neptunus, 15, 0, 0.006, 0.005, 14.5, 1.3); //neptunus
 const planet10 = drawSphere(0.3, pluto, 17, 0, 0.003, 0.003, 15.5, 2.5); //pluto
-const planet11 = drawSphere(0.2, bulan, 5, 1, 0.001, 0.003, 6.5, 3.3); //bulan
+const planet11 = drawSphere(0.2, bulan, 5, 1, 0.001, 0.003, 6.5, 2); //bulan
 //rotasi muter matahari
 // function muterMatahari(){
 //     requestAnimationFrame(muterMatahari)
