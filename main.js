@@ -163,11 +163,17 @@ const loader = new THREE.GLTFLoader();
 //     scale: 1
 // })
 
+const orbitRadius = 5;
+const orbitGeometry = new THREE.CircleGeometry(orbitRadius, 64);
+const orbitMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
+const orbit = new THREE.LineLoop(orbitGeometry, orbitMaterial);
+// scene.add(orbit);
+
 planet = [];
-const planet1 = drawSphere(1.25, matahari, 0, 0, 0.001); //buat matahari
-const planet2 = drawSphere(0.5, merkurius, 2, 0, 0.004); //merkurius
-const planet3 = drawSphere(0.4, venus, 3.25, 0, 0.005); //venus
-const planet4 = drawSphere(0.6, bumi, 4.75, 0, 0.006); //bumi
+const planet1 = drawSun(1.25, matahari, 0, 0, 0.001); //buat matahari
+const planet2 = drawSphere(0.5, merkurius, 2, 0, 0.004, 0.004, 0.004, 0.004); //merkurius
+const planet3 = drawSphere(0.4, venus, 3.25, 0, 0.005, 0.005, 0.005, 0.005); //venus
+const planet4 = drawSphere(0.6, bumi, 4.75, 0, 0.006, 0.006, 0.006, 0.006); //bumi
 const planet5 = drawSphere(0.5, mars, 6.5, 0, 0.003); //mars
 const planet6 = drawSphere(0.9, jupiter, 8.5, 0, 0.002); //jupiter
 const planet7 = drawSphere(0.7, saturnus, 11, 0, 0.005); //saturnus
@@ -183,7 +189,30 @@ const planet11 = drawSphere(0.2, bulan, 5, 1, 0.001); //bulan
 // }
 // muterMatahari()
 
-function drawSphere(radius, texture, x, y, rotY){
+function drawSun(radius, texture, x, y, rotY){
+    const geometry = new THREE.SphereGeometry(radius,50, 50);
+    const material = new THREE.MeshStandardMaterial({
+        map: texture,
+    });
+    const sphere = new THREE.Mesh(geometry, material);
+    sphere.position.x = x
+    sphere.position.y = y
+
+    object.add(sphere)
+    planet.push(sphere)
+    scene.add(sphere)
+
+    function pusing(){
+        requestAnimationFrame(pusing)
+        control.update()
+        sphere.rotation.y += rotY
+    }
+    pusing()
+
+    return pusing;
+}
+
+function drawSphere(radius, texture, x, y, rotY, rotX, posY, posX){
     const geometry = new THREE.SphereGeometry(radius,50, 50);
     const material = new THREE.MeshStandardMaterial({
         map: texture,
@@ -199,7 +228,22 @@ function drawSphere(radius, texture, x, y, rotY){
     function muter(){
         requestAnimationFrame(muter)
         control.update()
-        sphere.rotation.y += rotY
+        // sphere.rotation.y += rotY
+        // sphere.position.x += posX
+        // sphere.position.y += posY
+        // sphere.rotation.x += rotX
+
+        const time = Date.now() * 0.001;
+        const orbitSpeed = 0.5;
+        const orbitPosition = new THREE.Vector3(
+            Math.cos(time * orbitSpeed) * orbitRadius,
+            0,
+            Math.sin(time * orbitSpeed) * orbitRadius
+        );
+        sphere.position.copy(orbitPosition);
+
+        sphere.rotation.x += rotX;
+        sphere.rotation.y += rotY;
     }
     muter()
 
@@ -250,7 +294,7 @@ function loadObj(path, manipFunc, pos){
 }
 
 function animate(){
-    requestAnimationFrame(animate)
+    requestAnimationFrame(animate);
     control.update()
     renderer.render(scene, camera)
 }
