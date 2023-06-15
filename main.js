@@ -162,25 +162,24 @@ const loader = new THREE.GLTFLoader();
 //     z: 3,
 //     scale: 1
 // })
+// const orbitRadius2 = 3;
+// const orbitGeometry2 = new THREE.CircleGeometry(orbitRadius2, 64);
+// const orbitMaterial2 = new THREE.LineBasicMaterial({ color: 0xffffff });
+// const orbit2 = new THREE.LineLoop(orbitGeometry2, orbitMaterial2);
 
-const orbitRadius = 5;
-const orbitGeometry = new THREE.CircleGeometry(orbitRadius, 64);
-const orbitMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
-const orbit = new THREE.LineLoop(orbitGeometry, orbitMaterial);
-// scene.add(orbit);
 
 planet = [];
 const planet1 = drawSun(1.25, matahari, 0, 0, 0.001); //buat matahari
-const planet2 = drawSphere(0.5, merkurius, 2, 0, 0.004, 0.004, 0.004, 0.004); //merkurius
-const planet3 = drawSphere(0.4, venus, 3.25, 0, 0.005, 0.005, 0.005, 0.005); //venus
-const planet4 = drawSphere(0.6, bumi, 4.75, 0, 0.006, 0.006, 0.006, 0.006); //bumi
-const planet5 = drawSphere(0.5, mars, 6.5, 0, 0.003); //mars
-const planet6 = drawSphere(0.9, jupiter, 8.5, 0, 0.002); //jupiter
-const planet7 = drawSphere(0.7, saturnus, 11, 0, 0.005); //saturnus
-const planet8 = drawSphere(0.6, uranus, 13, 0, 0.003); //uranus
-const planet9 = drawSphere(0.5, neptunus, 15, 0, 0.006); //neptunus
-const planet10 = drawSphere(0.3, pluto, 17, 0, 0.003); //pluto
-const planet11 = drawSphere(0.2, bulan, 5, 1, 0.001); //bulan
+const planet2 = drawSphere(0.5, merkurius, 2, 0, 0.004, 0.004, 2.5, 3); //merkurius
+const planet3 = drawSphere(0.4, venus, 3.25, 0, 0.005, 0.005, 4, 2.5); //venus
+const planet4 = drawSphere(0.6, bumi, 4.75, 0, 0.006, 0.006, 5.5, 2); //bumi
+const planet5 = drawSphere(0.5, mars, 6.5, 0, 0.003, 0.003, 7.1, 4); //mars
+const planet6 = drawSphere(0.9, jupiter, 8.5, 0, 0.002, 0.002, 9, 5); //jupiter
+const planet7 = drawSphere(0.7, saturnus, 11, 0, 0.005, 0.005, 11.2, 1); //saturnus
+const planet8 = drawSphere(0.6, uranus, 13, 0, 0.003, 0.005, 13, 2.3); //uranus
+const planet9 = drawSphere(0.5, neptunus, 15, 0, 0.006, 0.005, 14.5, 1.3); //neptunus
+const planet10 = drawSphere(0.3, pluto, 17, 0, 0.003, 0.003, 15.5, 2.5); //pluto
+const planet11 = drawSphere(0.2, bulan, 5, 1, 0.001, 0.003, 6.5, 3.3); //bulan
 //rotasi muter matahari
 // function muterMatahari(){
 //     requestAnimationFrame(muterMatahari)
@@ -212,7 +211,11 @@ function drawSun(radius, texture, x, y, rotY){
     return pusing;
 }
 
-function drawSphere(radius, texture, x, y, rotY, rotX, posY, posX){
+function drawSphere(radius, texture, x, y, rotY, rotX, orbitRadius, orbitSpeed){
+    const orbitGeometry = new THREE.CircleGeometry(orbitRadius, 64);
+    const orbitMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
+    const orbit = new THREE.LineLoop(orbitGeometry, orbitMaterial);
+
     const geometry = new THREE.SphereGeometry(radius,50, 50);
     const material = new THREE.MeshStandardMaterial({
         map: texture,
@@ -228,21 +231,15 @@ function drawSphere(radius, texture, x, y, rotY, rotX, posY, posX){
     function muter(){
         requestAnimationFrame(muter)
         control.update()
-        // sphere.rotation.y += rotY
-        // sphere.position.x += posX
-        // sphere.position.y += posY
-        // sphere.rotation.x += rotX
 
         const time = Date.now() * 0.001;
-        const orbitSpeed = 0.5;
+        // const orbitSpeed = 0.5;
         const orbitPosition = new THREE.Vector3(
             Math.cos(time * orbitSpeed) * orbitRadius,
             0,
             Math.sin(time * orbitSpeed) * orbitRadius
         );
         sphere.position.copy(orbitPosition);
-
-        sphere.rotation.x += rotX;
         sphere.rotation.y += rotY;
     }
     muter()
