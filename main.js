@@ -133,19 +133,13 @@ display('./rocket/scene.gltf',function(o){
 
 display('./satelit_buatan/scene.gltf',function(o){
     o.position.y = 3;
-    o.position.x = 2;
-    // function animate(){
-    //     requestAnimationFrame(animate)
-    //     control.update()
-    //     o.position.y += -0.03
-    //     o.position.x += -0.05
-
-    //     if(o.position.y < -10){
-    //         o.position.y = 15
-    //         o.position.x = 10
-    //     }
-    // }
-    // animate()
+    o.position.x = -6;
+    function animate(){
+        requestAnimationFrame(animate)
+        control.update()
+        o.rotation.y += 0.001
+    }
+    animate()
 
 }, function(s){},{
     x: 3,
@@ -154,10 +148,26 @@ display('./satelit_buatan/scene.gltf',function(o){
     scale: 3
 })
 
+display('./UFO/scene.gltf', function(o){
+    o.position.y = 3;
+    o.position.x = 5;
+    function animate(){
+        requestAnimationFrame(animate)
+        control.update()
+        o.rotation.y += 0.01
+    }
+    animate()
+}, function(s){},{
+    x: 3,
+    y: 3,
+    z: 3,
+    scale: 1
+})
+
 display('./meteor/scene.gltf', function(o){
     o.position.y = 15;
     o.position.x = -10;
-    o.position.z = -20;
+    o.position.z = -25;
     function animateMeteor(){
         requestAnimationFrame(animateMeteor)
         control.update()
@@ -174,7 +184,7 @@ display('./meteor/scene.gltf', function(o){
     x : 3,
     y: 3,
     z: -1,
-    scale: 1.5
+    scale: 1
 })
 
 planet = [];
@@ -188,7 +198,7 @@ const planet7 = drawSphere(0.7, saturnus, 11, 0, 0.005, 0.005, 11.2, 1); //satur
 const planet8 = drawSphere(0.6, uranus, 13, 0, 0.003, 0.005, 13, 2.3); //uranus
 const planet9 = drawSphere(0.5, neptunus, 15, 0, 0.006, 0.005, 14.5, 1.3); //neptunus
 const planet10 = drawSphere(0.3, pluto, 17, 0, 0.003, 0.003, 15.5, 2.5); //pluto
-const planet11 = drawSphere(0.2, bulan, 5, 1, 0.001, 0.003, 6.5, 1); //bulan
+const planet11 = drawSphere(0.2, bulan, 5, 1, 0.001, 0.003, 6.5, 1.5); //bulan
 
 function drawSun(radius, texture, x, y, rotY){
     const geometry = new THREE.SphereGeometry(radius,50, 50);
@@ -235,7 +245,6 @@ function drawSphere(radius, texture, x, y, rotY, rotX, orbitRadius, orbitSpeed){
         control.update()
 
         const time = Date.now() * 0.001;
-        // const orbitSpeed = 0.5;
         const orbitPosition = new THREE.Vector3(
             Math.cos(time * orbitSpeed) * orbitRadius,
             0,
