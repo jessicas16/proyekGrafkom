@@ -86,30 +86,43 @@ const loader = new THREE.GLTFLoader();
 
 display('./rocket/scene.gltf',function(o){
     o.position.y = 1.5
-    o.position.x = -5
+    o.position.x = 4.5
     o.rotation.y = 0
-    function animateAstronot(){
+
+
+    function animateAstronot(radius, speed, rotY){
         requestAnimationFrame(animateAstronot)
         control.update()
-        if (o.position.x < 10 && o.rotation.y < 2.718281828){
-            o.rotation.y = 0
-            o.position.x += 0.01
-        } else {
-            o.rotation.y = 2.718281828
-            o.position.x -= 0.01
-        }
+        // if (o.position.x < 10 && o.rotation.y < 2.718281828){
+        //     o.rotation.y = 0
+        //     o.position.x += 0.01
+        // } else {
+        //     o.rotation.y = 2.718281828
+        //     o.position.x -= 0.01
+        // }
 
-        if(o.position.x < -10){
-            o.rotation.y = 0
-        }
+        // if(o.position.x < -10){
+        //     o.rotation.y = 0
+        // }
+
+        const time = Date.now() * 0.001;
+        const orbitPosition = new THREE.Vector3(
+            // Math.cos(time * speed) * radius,
+            3.7,
+            1,
+            1,
+            // Math.sin(time * speed) * radius
+        );
+        o.position.copy(orbitPosition);
+        o.rotation.y += 0.1;
     }
-    animateAstronot()
+    animateAstronot(1, 1.5, 0.001)
 
 }, function(s){},{
     x: 3,
     y: 3,
     z: 3,
-    scale: 0.005
+    scale: 0.002
 })
 
 // display('./alien_head/scene.gltf',function(o){
@@ -191,7 +204,7 @@ planet = [];
 const planet1 = drawSun(1.25, matahari, 0, 0, 0.001); //buat matahari
 const planet2 = drawSphere(0.5, merkurius, 2, 0, 0.004, 0.004, 2.5, 1); //merkurius
 const planet3 = drawSphere(0.4, venus, 3.25, 0, 0.005, 0.005, 4, 2); //venus
-const planet4 = drawSphere(0.6, bumi, 4.75, 0, 0.006, 0.006, 5.5, 1.5); //bumi
+const planet4 = drawBumi(0.6, bumi, 4.75, 0, 0.006, 0.006, 5.5, 1.5); //bumi
 const planet5 = drawSphere(0.5, mars, 6.5, 0, 0.003, 0.003, 7.1, 1.75); //mars
 const planet6 = drawSphere(0.9, jupiter, 8.5, 0, 0.002, 0.002, 9, 2.4); //jupiter
 const planet7 = drawSphere(0.7, saturnus, 11, 0, 0.005, 0.005, 11.2, 1); //saturnus
@@ -221,6 +234,37 @@ function drawSun(radius, texture, x, y, rotY){
     pusing()
 
     return pusing;
+}
+
+function drawBumi(radius, texture, x, y, rotY, rotX, orbitRadius, orbitSpeed){
+    const geometry = new THREE.SphereGeometry(radius,50, 50);
+    const material = new THREE.MeshStandardMaterial({
+        map: texture,
+    });
+    const sphere = new THREE.Mesh(geometry, material);
+    sphere.position.x = x
+    sphere.position.y = y
+
+    object.add(sphere)
+    planet.push(sphere)
+    scene.add(sphere)
+
+    function muter(){
+        requestAnimationFrame(muter)
+        control.update()
+
+        const time = Date.now() * 0.001;
+        const orbitPosition = new THREE.Vector3(
+            Math.cos(time * orbitSpeed) * orbitRadius,
+            0,
+            Math.sin(time * orbitSpeed) * orbitRadius
+        );
+        sphere.position.copy(orbitPosition);
+        sphere.rotation.y += rotY;
+    }
+    // muter()
+
+    return muter;
 }
 
 function drawSphere(radius, texture, x, y, rotY, rotX, orbitRadius, orbitSpeed){
